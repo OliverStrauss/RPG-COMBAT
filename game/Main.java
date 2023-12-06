@@ -5,10 +5,10 @@ import java.util.Random;
 
 public class Main {
     private static String chooseClass(Scanner scanner) {
-        // Prompt the user for input\        
+        // Prompt the user for input\
         System.out.print("Choose what class of Hero you would like to be: Barbarian, Wizard or Ranger:");
         String choice = scanner.nextLine();
-        while(choice.equals("Wizard") == false && choice.equals("Barbarian") == false && choice .equals("Ranger")==false ){
+        while(!choice.equals("Wizard") && !choice.equals("Barbarian") && !choice.equals("Ranger")){
             System.out.print("Choose what class of Hero you would like to be: Barbarian, Wizard or Ranger:");
             choice = scanner.nextLine();
         }

@@ -4,6 +4,9 @@ import java.util.Random;
 
 
 public class Main {
+
+
+
     private static String chooseClass(Scanner scanner) {
         // Prompt the user for input\
         System.out.print("Choose what class of Hero you would like to be: Barbarian, Wizard or Ranger:");
@@ -18,57 +21,70 @@ public class Main {
     }
     private static String chooseName(Scanner scanner) {
         // Prompt the user for input\        
-        System.out.print("Choose the name of your Hero");
+        System.out.print("Choose the name of your Hero ");
         
-        String choice = scanner.nextLine();
-        
-        return choice;
+        return scanner.nextLine();
     }
-    private static int genStat(String stat){
-        Random random = new Random();
-        int randomNumber = random.nextInt(6);
-        int randomNumber1 = random.nextInt(6);
-        int randomNumber2 = random.nextInt(6);
-        int randomNumber3 = random.nextInt(6);
 
-        int[]rolls = {randomNumber,randomNumber1,randomNumber2,randomNumber3};
-        int min = rolls[0];
-        for (int i = 1; i < rolls.length; i++) {
-            if (rolls[i] < min) {
-                min = rolls[i];
-            }
+    private static void pauseGame(int delay) {
+        try {
+            // Sleep for 1000 milliseconds (1 second)
+            Thread.sleep(delay);
+        } catch (InterruptedException e) {
+            // Handle InterruptedException if necessary
+            e.printStackTrace();
         }
 
-        // Compute the sum of elements excluding the smallest number
-        int sum = 0;
-        for (int num : rolls) {
-            if (num != min) {
-                sum += num;
-            }
-        }
-        System.out.println("Your"+stat+"is"+sum);
-        return sum;
+            // Wait for the user to press Enter
+
+    }
+    public static int roll(String name){
+        Random rand = new Random();
+        int val =  rand.nextInt(0,20);
+        System.out.println(name + " has rolled a " + val);
+        return val;
+    }
+
+    public static double RollToPercent(int roll){
+        return (roll*5.0)/100;
 
     }
 
-
+    public static int waveCount =1;
     public static void main(String[] args) {
-        String[] heros = {"Wizard","Barb","Ranger"};
+        String[] heroes = {"Wizard","Barbarian","Ranger"};
+        String [] stats = {"Health","Dodge","Armor","Dodge"};
+        boolean running = true;
         Scanner scanner = new Scanner(System.in);
         Scanner scanner1 = new Scanner(System.in);
 
         // Call the method to get user input
         String Hname = chooseName(scanner1);
         String Hclass = chooseClass(scanner);
-        System.out.println("Welcome"+Hname+"our newest"+Hclass + "We will now roll for your stats ");
-        int health = genStat("Health");
-        int attack = genStat("Attack");
-        int dodge = genStat("Dodge");
+        System.out.println("Welcome "+Hname+" our newest "+Hclass + " We will now roll for your stats ");
 
-        if(Hclass.equals(heros[0])){
-            Wizard w = new Wizard(Hname,health,attack,dodge);
-            System.out.println(w);
+        if(Hclass.equals(heroes[0])){
+            Wizard hero = new Wizard(Hname);
+        }
+        Wizard hero = new Wizard(Hname);
 
+
+        pauseGame(1000);
+        System.out.println(hero);
+        while(waveCount < 7){
+            System.out.println("Entering wave "+waveCount);
+            pauseGame(1000);
+            Enemy e = new Skeleton();
+            //System.out.println(e);
+
+            hero.PlayerTurn(e);
+            System.out.println(e);
+            pauseGame(2000);
+            e.AttackHero(hero);
+            System.out.println(hero);
+
+
+            waveCount +=1;
         }
 
         scanner.close();

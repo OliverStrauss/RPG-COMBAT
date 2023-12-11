@@ -26,7 +26,7 @@ public class Main {
         return scanner.nextLine();
     }
 
-    private static void pauseGame(int delay) {
+    public static void pauseGame(int delay) {
         try {
             // Sleep for 1000 milliseconds (1 second)
             Thread.sleep(delay);

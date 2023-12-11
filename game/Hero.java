@@ -132,15 +132,18 @@ public class Hero {
         boolean isCombat = isCombat(pAction);
 
         double PlayerRoll = Main.RollToPercent(Main.roll(this.name));
+        Main.pauseGame(2000);
 
         int dmg = CalcChoice(pAction) + AttackModifer();
         if (isCombat){
             if(e.gotHit(EDodge,PlayerRoll)) {
                 AttackEnemy(e,dmg,actionName);
+                Main.pauseGame(2000);
                 checkAlive(e,actionName);
 
             }
             else{
+                Main.pauseGame(2000);
                 dodged(e,pAction);
             }
 

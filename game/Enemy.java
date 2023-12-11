@@ -90,6 +90,7 @@ public class Enemy {
     public void AttackHero(Hero h){
         Random rand = new Random();
         double eRoll =Main.RollToPercent(Main.roll(this.name));
+        Main.pauseGame(2000);
 
         int hArmor = h.getArmor();
         int hDodge = h.getDodge();
@@ -103,6 +104,7 @@ public class Enemy {
             h.displayHealth();
         }
         else{
+            Main.pauseGame(2000);
             System.out.println(h.name+ "has miraculously dodged the attack!");
         }
     }
